@@ -1,6 +1,7 @@
 /**
  *   Take in Arduino inputs and trigger sounds in processing
  
+ NOTE - You may need to change the serial number to connect to your arduino!
  
  based off
  Processing Sound Library, Example 4
@@ -38,13 +39,26 @@ PFont f;
 
 void setup() {
 
+ if(Serial.list().length>0){ 
+  printArray(Serial.list()); //This lists all the available serial ports, you may need to choose a different one
   String portName = Serial.list()[0]; //change the 0 to a 1 or 2 etc. to match your port
+  
   myPort = new Serial(this, portName, 9600);
   myPort.clear();
-   // Throw out the first reading, in case we started reading 
+     // Throw out the first reading, in case we started reading 
   // in the middle of a string from the sender.
   val = myPort.read();
   val = 255;
+ }
+ else{
+     println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+  println("You need to connect an arduino to the USB");
+       println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+  exit();
+ }
+
 
   size(640, 360);
 
@@ -56,7 +70,7 @@ void setup() {
   // the files 1.aif, 2.aif, 3.aif, ..., n.aif it is easy to iterate
   // through the folder and load all files in one line of code.
   for (int i = 0; i < numsounds; i++) {
-    file[i] = new SoundFile(this, (i+1) + ".wav");
+    file[i] = new SoundFile(this, (i) + ".wav");
   }
 
 

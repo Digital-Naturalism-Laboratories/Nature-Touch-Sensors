@@ -167,7 +167,7 @@ void loop()
       if (!debugSerialmode) {
 
         Serial.write(p);               // send number of pin touched to Processing to queue sample 0
-        delay(1000);
+        delay(1500);
       }
     }
     else {
